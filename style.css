@@ -1,0 +1,402 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:black;
+    overflow:hidden;
+    font-family:Arial, Helvetica, sans-serif;
+    transition:background 2s ease;
+}
+
+/* Fondo rosado después del click */
+
+body.activo{
+    background:#ffc6d9;
+}
+
+/* BOTÓN */
+
+#btnInicio{
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+
+    background:white;
+    color:black;
+
+    border:none;
+    border-radius:14px;
+
+    padding:18px 38px;
+
+    font-size:1.2rem;
+    font-weight:bold;
+
+    cursor:pointer;
+
+    box-shadow:0 10px 30px rgba(255,255,255,.25);
+
+    transition:.3s;
+}
+
+#btnInicio:hover{
+    transform:translate(-50%,-50%) scale(1.05);
+}
+
+#btnInicio.ocultar{
+    opacity:0;
+    pointer-events:none;
+}
+
+/* CONTENEDOR */
+
+.contenedor{
+    position:relative;
+}
+
+/* Estado inicial */
+
+.oculto{
+    opacity:0;
+    transform:scale(.5);
+    pointer-events:none;
+}
+
+/* Aparición */
+
+.contenedor.mostrar{
+    opacity:1;
+    transform:scale(1);
+    pointer-events:auto;
+
+    transition:
+        opacity 1s ease,
+        transform 1s ease;
+}
+
+/* BURBUJA */
+
+.burbuja{
+    position:absolute;
+    top:-60px;
+    left:50%;
+    transform:translateX(-50%);
+    background:white;
+    padding:14px 28px;
+    border-radius:30px;
+    font-weight:bold;
+    box-shadow:0 8px 20px rgba(0,0,0,.15);
+    opacity:0;
+    transition:.3s;
+    z-index:100;
+    white-space:nowrap;
+}
+
+.burbuja::after{
+    content:"";
+    position:absolute;
+    width:16px;
+    height:16px;
+    background:white;
+    bottom: -8px;
+    left:50%;
+    transform:translateX(-50%) rotate(45deg);
+}
+
+.contenedor:hover .burbuja{
+    opacity:1;
+}
+
+/* PINGÜINO */
+
+.pinguino{
+    position:relative;
+    width:340px;
+    transition:.3s;
+}
+
+
+
+/* CABEZA */
+
+.cabeza{
+    width:230px;
+    height:220px;
+    background:#413f3f;
+    border-radius:50%;
+    margin:auto;
+    position:relative;
+    z-index:20;
+
+    box-shadow:
+        inset -8px -8px 15px rgba(255,255,255,.08),
+        inset 8px 8px 15px rgba(0,0,0,.25);
+}
+
+.cara{
+    width:175px;
+    height:155px;
+    background:white;
+    border-radius:50%;
+    position:absolute;
+    left:50%;
+    top:42px;
+    transform:translateX(-50%);
+}
+
+/* CACHETES */
+
+.cara::before,
+.cara::after{
+    content:"";
+    position:absolute;
+    width:22px;
+    height:12px;
+    background:#ffd6dc;
+    border-radius:50%;
+    top:72px;
+    opacity:.8;
+}
+
+.cara::before{
+    left:18px;
+}
+
+.cara::after{
+    right:18px;
+}
+
+/* OJOS */
+
+.ojo{
+    width:62px;
+    height:62px;
+    background:#111;
+    border-radius:50%;
+    position:absolute;
+    top:42px;
+}
+
+.ojo-izq{
+    left:38px;
+}
+
+.ojo-der{
+    right:38px;
+}
+
+.ojo::before{
+    content:"";
+    position:absolute;
+    width:20px;
+    height:20px;
+    background:white;
+    border-radius:50%;
+    top:8px;
+    left:10px;
+}
+
+.ojo::after{
+    content:"";
+    position:absolute;
+    width:10px;
+    height:10px;
+    background:white;
+    border-radius:50%;
+    bottom:12px;
+    right:14px;
+}
+
+/* PICO */
+
+.pico{
+    width:55px;
+    height:38px;
+    background:#c9c9c9;
+    border:2px solid #9d9d9d;
+    border-radius:50%;
+    position:absolute;
+    left:50%;
+    top:115px;
+    transform:translateX(-50%);
+}
+
+/* CUERPO */
+
+.cuerpo{
+    width:260px;
+    height:290px;
+    background:#413f3f;
+    border-radius:50%;
+    margin:auto;
+    margin-top:-25px;
+    position:relative;
+
+    box-shadow:
+        inset -10px -10px 20px rgba(255,255,255,.08),
+        inset 10px 10px 20px rgba(0,0,0,.15);
+}
+
+.panza{
+    width:190px;
+    height:230px;
+    background:white;
+    border-radius:50%;
+    position:absolute;
+    left:50%;
+    top:25px;
+    transform:translateX(-50%);
+}
+
+/* MATE */
+
+.mate{
+    width:75px;
+    height:90px;
+    background:#8b5a2b;
+    position:absolute;
+    left:50%;
+    top:45px;
+    transform:translateX(-50%);
+    border-radius:0 0 25px 25px;
+    z-index:20;
+
+    box-shadow:
+        inset 0 0 12px rgba(0,0,0,.25),
+        0 4px 8px rgba(0,0,0,.15);
+}
+
+.mate::before{
+    content:"";
+    position:absolute;
+    width:75px;
+    height:18px;
+    background:#a76a35;
+    border-radius:50%;
+    top:-11px;
+}
+
+.bombilla{
+    position:absolute;
+    width:6px;
+    height:75px;
+    background:silver;
+    right:22px;
+    top:-72px;
+    transform:rotate(-20deg);
+    border-radius:4px;
+}
+
+/* ALAS */
+
+.ala{
+    width:85px;
+    height:110px;
+    background:#413f3f;
+    position:absolute;
+    top:50px;
+    border-radius:50px;
+    z-index:100;
+}
+
+.ala-izq{
+    left:18px;
+    transform:rotate(45deg);
+    z-index:35;
+}
+
+.ala-der{
+    right:38px;
+    top:50px;
+    transform:rotate(-45deg);
+    position:absolute;
+    width:85px;
+    height:110px;
+}
+
+.ala-der::before{
+    content:"";
+    position:absolute;
+    width:85px;
+    height:120px;
+    border-radius:50px;
+    top:0;
+    left:0;
+}
+
+.movimiento{
+    position:absolute;
+    inset:0;
+
+    transition:
+        transform .8s cubic-bezier(.34,1.56,.64,1);
+
+    z-index:100;
+
+    cursor:pointer;
+}
+
+/* MATE CERCA DEL PICO */
+
+.movimiento.tomar-mate{
+
+    transform:
+        translateY(-35px)
+        translateX(8px)
+
+}
+/* PIES */
+
+.pies{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    margin-top:-10px;
+}
+
+.pie{
+    width:45px;
+    height:18px;
+    background:#111;
+    border-radius:20px;
+}
+
+/* SOMBRA */
+
+.pinguino::after{
+    content:"";
+    position:absolute;
+    width:200px;
+    height:25px;
+    background:rgba(0,0,0,.15);
+    border-radius:50%;
+    bottom:-25px;
+    left:50%;
+    transform:translateX(-50%);
+    filter:blur(6px);
+    z-index:-1;
+}
+
+
+
+/* RESPONSIVE */
+
+@media (max-width:600px){
+
+    .pinguino{
+        transform:scale(.75);
+    }
+
+    .burbuja{
+        top:-70px;
+        font-size:.9rem;
+    }
+}
